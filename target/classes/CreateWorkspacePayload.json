@@ -1,0 +1,8 @@
+{
+  "workspace":
+  {
+    "name": "API Lifecycle Workspace",
+    "type": "team",
+    "description": "Creating a Team Workspace using the Postman API"
+  }
+}
