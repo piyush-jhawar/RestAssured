@@ -3,6 +3,7 @@ package com.rest;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.config.EncoderConfig;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -127,27 +128,60 @@ public class RequestParameters {
                 multiPart("file", new File("temp.txt")).
                 multiPart("attributes", attributes, "application/json").
                 log().all().
-                when().
+        when().
                 post("/post").
-                then().
+        then().
                 log().all().
                 assertThat().
                 statusCode(200);
     }
 
     @Test
-    public void download_file_multipart_form_data() throws IOException {
+    public void download_file_multipart_form_data_bytes() throws IOException {
 
-        byte [] bytes = given().
-                baseUri("https://raw.githubusercontent.com").
-                log().all().
-                when().
-                get("/appium/appium/master/sample-code/apps/ApiDemos-debug.apk").
-                then().
-                log().all().extract().response().asByteArray();
+        byte[] bytes = given().
+                               baseUri("https://raw.githubusercontent.com").
+                               log().all().
+                       when().
+                               get("/appium/appium/master/sample-code/apps/ApiDemos-debug.apk").
+                       then().
+                               log().all().extract().response().asByteArray();
 
         OutputStream os = new FileOutputStream(new File("ApiDemos-debug.apk"));
         os.write(bytes);
         os.close();
+    }
+
+    @Test
+    public void download_file_multipart_form_data_inputstream() throws IOException {
+
+        InputStream inputStream = given().
+                                          baseUri("https://raw.githubusercontent.com").
+                                          log().all().
+                                  when().
+                                          get("/appium/appium/master/sample-code/apps/ApiDemos-debug.apk").
+                                  then().
+                                          log().all().extract().response().asInputStream();
+
+        OutputStream os = new FileOutputStream(new File("ApiDemos-debug2.apk"));
+        byte[] bytes = new byte[inputStream.available()];
+        inputStream.read(bytes);
+        os.write(bytes);
+        os.close();
+    }
+
+    @Test
+    public void form_url_encoded() {
+        given().
+                baseUri("https://postman-echo.com").
+                config(config().encoderConfig(EncoderConfig.encoderConfig().
+                        appendDefaultContentCharsetToContentTypeIfUndefined(false))).
+                formParam("key1", "value1").
+                formParam("key 2", "value 2").
+                log().all().
+        when().
+                post("/post").
+        then().
+                log().all();
     }
 }
