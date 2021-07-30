@@ -52,9 +52,9 @@ public class RequestPayloadAsJsonArray {
 
         given().
                 body(jsonList).
-                when().
+        when().
                 post("/post").
-                then().spec(responseSpecification)
+        then().spec(responseSpecification)
                 .assertThat().
                 body("msg", is(equalTo("success")));
     }
