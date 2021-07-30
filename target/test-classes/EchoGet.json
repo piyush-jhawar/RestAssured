@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "default": {},
+  "description": "The root schema comprises the entire JSON document.",
+  "required": [
+    "args",
+    "headers",
+    "url"
+  ],
+  "title": "The root schema",
+  "type": "object",
+  "properties": {
+    "args": {
+      "default": {},
+      "description": "An explanation about the purpose of this instance.",
+      "title": "The args schema",
+      "type": "object",
+      "additionalProperties": true
+    },
+    "headers": {
+      "default": {},
+      "description": "An explanation about the purpose of this instance.",
+      "required": [
+        "x-forwarded-proto",
+        "x-forwarded-port",
+        "host",
+        "x-amzn-trace-id",
+        "accept",
+        "user-agent",
+        "accept-encoding"
+      ],
+      "title": "The headers schema",
+      "type": "object",
+      "properties": {
+        "x-forwarded-proto": {
+          "default": "",
+          "description": "An explanation about the purpose of this instance.",
+          "title": "The x-forwarded-proto schema",
+          "type": "string"
+        },
+        "x-forwarded-port": {
+          "default": "",
+          "description": "An explanation about the purpose of this instance.",
+          "title": "The x-forwarded-port schema",
+          "type": "string"
+        },
+        "host": {
+          "default": "",
+          "description": "An explanation about the purpose of this instance.",
+          "title": "The host schema",
+          "type": "string"
+        },
+        "x-amzn-trace-id": {
+          "default": "",
+          "description": "An explanation about the purpose of this instance.",
+          "title": "The x-amzn-trace-id schema",
+          "type": "string"
+        },
+        "accept": {
+          "default": "",
+          "description": "An explanation about the purpose of this instance.",
+          "title": "The accept schema",
+          "type": "string"
+        },
+        "user-agent": {
+          "default": "",
+          "description": "An explanation about the purpose of this instance.",
+          "title": "The user-agent schema",
+          "type": "string"
+        },
+        "accept-encoding": {
+          "default": "",
+          "description": "An explanation about the purpose of this instance.",
+          "title": "The accept-encoding schema",
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "url": {
+      "default": "",
+      "description": "An explanation about the purpose of this instance.",
+      "title": "The url schema",
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}
