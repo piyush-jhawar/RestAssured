@@ -1,6 +1,17 @@
 package com.rest.pojo.users;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+//@JsonInclude(JsonInclude.Include.NON_NULL)
+//@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+//@JsonInclude(JsonInclude.Include.NON_EMPTY)
+//@JsonIgnoreProperties(value = "id", allowSetters = true)
+//@JsonIgnoreProperties(value = {"id", "i"}, allowSetters = true)
 public class UserRoot {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+//    @JsonIgnore
     private String id;
     private String name;
     private String username;

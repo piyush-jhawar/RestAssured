@@ -40,7 +40,7 @@ public class UserPojoTest {
     }
 
     @Test
-    public void workspace_serialize_deserialize() throws JsonProcessingException {
+    public void users_serialize_deserialize() throws JsonProcessingException {
         Geo geo = new Geo("-37.3159", "81.1496");
         Address address = new Address("Kulas Light", "Apt. 556", "Gwenborough", "92998-3874", geo);
         Company company = new Company("Romaguera-Crona", "Multi-layered client-server neural-net", "harness real-time e-markets");
@@ -61,29 +61,29 @@ public class UserPojoTest {
 
     }
 
-    @Test(dataProvider = "workspace")
-    public void workspace_serialize_deserialize_withdataprovider(String name, String type, String description) throws JsonProcessingException {
-        Workspace workspace = new Workspace(name, type, description);
-        WorkspaceRoot workspaceRoot = new WorkspaceRoot(workspace);
-
-        WorkspaceRoot deserworkspaceroot = given().
-                body(workspaceRoot).
-                when().
-                post("/workspaces").
-                then().spec(responseSpecification).
-                extract().response().
-                as(WorkspaceRoot.class);
-
-//        assertThat(deserworkspaceroot.getWorkspace().getName(), is(equalTo("Pojo workspace")));
-        assertThat(deserworkspaceroot.getWorkspace().getId(), matchesPattern("^[a-z0-9-]{36}$"));
-
-    }
-
-    @DataProvider(name = "workspace")
-    public Object[][] getWorkspace() {
-        return new Object[][]{
-                {"Pojo workspace", "team", "This is team pojo workspace"},
-                {"Pojo workspace per", "personal", "This is team pojo workspace"}
-        };
-    }
+//    @Test(dataProvider = "workspace")
+//    public void workspace_serialize_deserialize_withdataprovider(String name, String type, String description) throws JsonProcessingException {
+//        Workspace workspace = new Workspace(name, type, description);
+//        WorkspaceRoot workspaceRoot = new WorkspaceRoot(workspace);
+//
+//        WorkspaceRoot deserworkspaceroot = given().
+//                body(workspaceRoot).
+//                when().
+//                post("/workspaces").
+//                then().spec(responseSpecification).
+//                extract().response().
+//                as(WorkspaceRoot.class);
+//
+////        assertThat(deserworkspaceroot.getWorkspace().getName(), is(equalTo("Pojo workspace")));
+//        assertThat(deserworkspaceroot.getWorkspace().getId(), matchesPattern("^[a-z0-9-]{36}$"));
+//
+//    }
+//
+//    @DataProvider(name = "workspace")
+//    public Object[][] getWorkspace() {
+//        return new Object[][]{
+//                {"Pojo workspace", "team", "This is team pojo workspace"},
+//                {"Pojo workspace per", "personal", "This is team pojo workspace"}
+//        };
+//    }
 }
